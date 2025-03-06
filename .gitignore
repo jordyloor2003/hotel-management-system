@@ -1,0 +1,12 @@
+# Ignore virtual environment
+venv/
+env/
+
+# Python cache files 
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore migrations except __init__.py
+**/migrations/*.py
+!**/migrations/__init__.py
