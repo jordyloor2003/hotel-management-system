@@ -1,8 +1,6 @@
 from django.db import models
 from ..User.models import User
 
-# Create your models here.
-
 class Hotel(models.Model):
     # Fields
     name = models.CharField(max_length=255, unique=True)
