@@ -32,6 +32,12 @@ class Booking(models.Model):
         verbose_name_plural = "Bookings"
 
     #Methods
+    def __str__(self):
+        """
+        Returns a readable representation of the booking.
+        """
+        return f"{self.customer.username} - {self.hotel.name} ({self.check_in} to {self.check_out})"
+
     def get_total_price(self):
         """
         Calculate the total price of the reservation based on the number of nights.
