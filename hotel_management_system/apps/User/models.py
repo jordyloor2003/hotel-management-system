@@ -7,6 +7,17 @@ class User(AbstractUser):
     is_hotel_owner = models.BooleanField(default=False)
     is_customer = models.BooleanField(default=True)
 
+    groups = models.ManyToManyField(
+        "auth.Group",
+        related_name="custom_user_groups",
+        blank=True
+    )
+    user_permissions = models.ManyToManyField(
+        "auth.Permission",
+        related_name="custom_user_permissions",
+        blank=True
+    )
+
     # Metadata
     class Meta:
         ordering = ['username']
