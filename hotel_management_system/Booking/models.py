@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ValidationError
 from ..User.models import User
 from ..Hotel.models import Hotel
 from django.utils.timezone import now
