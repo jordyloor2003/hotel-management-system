@@ -1,5 +1,5 @@
 from django.db import models
-from ..User.models import User
+from User.models import User
 
 class Hotel(models.Model):
     # Fields
