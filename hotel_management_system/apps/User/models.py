@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     # Fields
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    phone_number = models.CharField(max_length=10, blank=True, null=True)
     is_hotel_owner = models.BooleanField(default=False)
     is_customer = models.BooleanField(default=True)
 
@@ -59,12 +59,10 @@ class User(AbstractUser):
         """
         Returns a list of hotels owned by the user (if they are a hotel owner).
         """
-        if self.is_hotel_owner:
-            return self.hotels.all()
-        return []
+        return self.hotels.all()
 
     def get_total_hotels(self):
         """
         Returns the total number of hotels the user owns.
         """
-        return self.hotels.count() if self.is_hotel_owner else 0
+        return self.hotels.count()
