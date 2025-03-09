@@ -70,5 +70,5 @@ class Hotel(models.Model):
         Updates the price per night for the hotel.
         """
         if new_price > 0:
-            self.price_per_night = new_price
+            self.price_night = new_price
             self.save()
