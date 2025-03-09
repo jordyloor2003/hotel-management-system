@@ -63,7 +63,7 @@ class Hotel(models.Model):
         """
         Returns a list of amenities as an array instead of a comma-separated string.
         """
-        return self.amenities.split(",") if self.amenities else []
+        return [amenity.strip() for amenity in self.amenities.split(",")] if self.amenities else []
 
     def update_price(self, new_price):
         """
