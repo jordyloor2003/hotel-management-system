@@ -38,6 +38,10 @@ class Booking(models.Model):
         """
         return f"{self.customer.username} - {self.hotel.name} ({self.check_in} to {self.check_out})"
 
+    def clean(self):
+        if self.check_in >= self.check_out:
+            raise ValidationError("Check-in date must be before check-out date.")
+
     def get_total_price(self):
         """
         Calculate the total price of the reservation based on the number of nights.
