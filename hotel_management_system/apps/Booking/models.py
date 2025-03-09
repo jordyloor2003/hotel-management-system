@@ -43,7 +43,7 @@ class Booking(models.Model):
         Calculate the total price of the reservation based on the number of nights.
         """
         nights = (self.check_out - self.check_in).days
-        return self.hotel.price_for_night * nights if nights > 0 else 0
+        return self.hotel.price_night * nights if nights > 0 else 0
     
     def get_duration(self):
         """
