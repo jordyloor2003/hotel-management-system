@@ -15,9 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-
-from django.urls import include
+from django.urls import path, include
 from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
@@ -25,9 +23,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     # paths from the system app
-    path('booking/', include('apps.Booking.urls')),
-    path('hotel/', include('apps.Hotel.urls')),
-    path('user/', include('apps.User.urls')),
+    path('booking/', include('Booking.urls')),
+    path('hotel/', include('Hotel.urls')),
+    path('user/', include('User.urls')),
+    
     # add URL maps to redirect the base URL to our app
     path('', RedirectView.as_view(url='/booking/', permanent=True)), 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) # Use static() to add url mapping to serve static files during development (only)
