@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Perfil de {{ object.username }}</h1>
+<p><strong>Nombre:</strong> {{ object.get_full_name }}</p>
+<p><strong>Teléfono:</strong> {{ object.phone_number }}</p>
+<p><strong>Email:</strong> {{ object.email }}</p>
+<p><strong>Tipo de Usuario:</strong> 
+    {% if object.is_hotel_owner %}Dueño de Hotel{% else %}Cliente{% endif %}
+</p>
+<a href="{% url 'user_edit' %}">Editar Perfil</a>
+<a href="{% url 'logout' %}">Cerrar Sesión</a>
+{% endblock %}
