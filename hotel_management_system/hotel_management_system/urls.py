@@ -28,5 +28,5 @@ urlpatterns = [
     path('user/', include('User.urls')),
     
     # add URL maps to redirect the base URL to our app
-    path('', RedirectView.as_view(url='/booking/', permanent=True)), 
+    path('', RedirectView.as_view(url='/user/login', permanent=True)), 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) # Use static() to add url mapping to serve static files during development (only)
