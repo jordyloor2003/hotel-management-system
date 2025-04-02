@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
+import re
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -14,6 +15,13 @@ class CustomUserCreationForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("This email is already registered.")
         return email
+    
+    def clean_phone_number(self):
+        """Validate that the phone number is in a valid format"""
+        phone_number = self.cleaned_data.get('phone_number')
+        if phone_number and not re.match(r'^\d{10}$', phone_number):
+            raise forms.ValidationError("Phone number must be 10 digits.")
+        return phone_number
 
     def clean(self):
         """Ensure a user can't be both a hotel owner and a customer"""
