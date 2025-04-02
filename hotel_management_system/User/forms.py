@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Group
 from .models import User
 import re
 
@@ -29,8 +30,22 @@ class CustomUserCreationForm(UserCreationForm):
         is_hotel_owner = cleaned_data.get('is_hotel_owner')
         is_customer = cleaned_data.get('is_customer')
 
-        # Verifica que no puedan ser ambos
         if is_hotel_owner and is_customer:
             raise forms.ValidationError("A user cannot be both a hotel owner and a customer at the same time.")
         
         return cleaned_data
+    
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        
+        if user.is_hotel_owner:
+            group = Group.objects.get(name='hotel_owner')
+            user.groups.add(group)
+        
+        if user.is_customer:
+            group = Group.objects.get(name='customer')
+            user.groups.add(group)
+        
+        if commit:
+            user.save()
+        return user
