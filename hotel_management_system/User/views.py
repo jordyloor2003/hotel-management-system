@@ -21,13 +21,12 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     template_name= "users/detail.html"
     
     def get_object(self):
-        """"""
         return self.request.user
     
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model= User
     template_name= "users/edit.html"
-    fields= "__all__"
+    fields = ['username', 'email', 'phone_number']
     success_url= reverse_lazy('user_detail')
     
     def get_object(self):
@@ -44,6 +43,6 @@ class CustomLoginView(LoginView):
         login(self.request, user)
         
         if user.is_hotel_owner:
-            return redirect('/hotel/dashboard/')  # Redirigir a página de dueños de hoteles
+            return redirect('/hotel/dashboard/')
         else:
-            return redirect('/booking/')  # Redirigir a clientes
+            return redirect('/booking/')
