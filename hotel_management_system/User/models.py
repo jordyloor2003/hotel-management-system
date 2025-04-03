@@ -92,6 +92,8 @@ class User(AbstractUser):
         """
         super().save(*args, **kwargs)
 
+        self.groups.clear()
+
         if self.is_hotel_owner:
             group, _ = Group.objects.get_or_create(name='hotel_owner')
             self.groups.add(group)
