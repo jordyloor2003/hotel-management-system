@@ -38,6 +38,9 @@ class CustomUserCreationForm(UserCreationForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         
+        if commit:
+            user.save()
+        
         if user.is_hotel_owner:
             group = Group.objects.get(name='hotel_owner')
             user.groups.add(group)
@@ -46,6 +49,4 @@ class CustomUserCreationForm(UserCreationForm):
             group = Group.objects.get(name='customer')
             user.groups.add(group)
         
-        if commit:
-            user.save()
         return user
