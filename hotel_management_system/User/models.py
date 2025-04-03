@@ -5,6 +5,7 @@ import re
 
 class User(AbstractUser):
     # Fields
+    email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=10, blank=True, null=True, unique=True)
     is_hotel_owner = models.BooleanField(default=False)
     is_customer = models.BooleanField(default=True)
